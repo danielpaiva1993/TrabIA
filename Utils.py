@@ -31,5 +31,6 @@ class Utils:
 			return todas as pedras - mesa - mao
 		'''
 		return []
-
-	def put_in_mesa(mesa, pedra, lado)
+	def probabilidade_buy(pedra):
+		##return a probabilidade de comprar determinada pedra
+		return ##int
