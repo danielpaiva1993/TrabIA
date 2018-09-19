@@ -43,7 +43,7 @@ class Domino:
 			else:
 				resp = jogadorA.play_turno(mesa, self.compra.length, jogadorB.mao.length)
 
-				if(resp == self.mesa):
+				if(resp == self.mesa.atual):
 					if(self.compra.length == 0):
 						turnosSemJogo+=1
 
@@ -54,7 +54,7 @@ class Domino:
 						self.compra = self.jogadorA.buy_pedra(self.compra)
 						turnosSemJogo = 0
 				else:
-					self.mesa = 
+					self.mesa.atual = resp 
 					turnosSemJogo = 0
 
 				proxTurno = self.turno(jogadorB, jogadorA, turnosSemJogo)
