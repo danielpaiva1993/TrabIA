@@ -94,7 +94,7 @@ class JogadorEMinMax:
 					prob = 0;
 					para cada pedra em u.compraveis(mesa, mao):
 						novaMao = mao.append(pedra)
-						prob = prob + u.probabilidade_buy(pedra, mesa, sizeCompra, sizeAdversarioHand)*self.prob_min(mesa, novaMao, sizeCompra-1, sizeAdversarioHand, 0) 
+						prob = prob + u.probabilidade_buy_pedra(len(compraveis), sizeCompra, sizeAdversarioHand)*self.prob_min(mesa, novaMao, sizeCompra-1, sizeAdversarioHand, 0) 
 					return prob
 			else:
 				return self.max(mesa, mao, sizeCompra, sizeAdversarioHand, 0)
