@@ -2,30 +2,31 @@ import Pedra
 class Utils:
 	
 	def jogaveis_max_esquerda(mesa, mao):
-		
-
-		'''
-			return pedras na mao de max que se encaixem na esquerda de mesa
-		'''
-		return []
+		jogaveis = []
+		for pedra in mao:
+			if pedra.direita == mesa[0].esquerda or pedra.esquerda == mesa[0].esquerda:
+				jogaveis.push(pedra)
+		return jogaveis
 
 	def jogaveis_max_direita(mesa, mao):
-		'''
-			return pedras na mao de max que se encaixem em direita de mesa
-		'''
-		return []
+		jogaveis = []
+		for pedra in mao:
+			if pedra.direita == mesa[-1].direita or pedra.esquerda == mesa[-1].direita:
+				jogaveis.push(pedra)
+		return jogaveis
 
-	def jogaveis_min_esquerda(mesa, mao):
-		'''
-			return jogaveis_max_esquerda(mesa, self.compraveis(mesa, mao))
-		'''
-		return []
-
+	def jogaveis_min_esquerda(self, mesa, mao):
+		jogaveis = self.compraveis(mesa, mao) ##ou seja, todos que podem estar na mao de min
+		for pedra in jogaveis:
+			if pedra.direita != mesa[0].esquerda and pedra.esquerda != mesa[0].esquerda:
+				jogaveis.remove(pedra)
+		return jogaveis
 	def jogaveis_min_direita(mesa, mao):
-		'''
-			return jogaveis_max_direita(mesa, self.compraveis(mesa, mao))
-		'''
-		return []
+		jogaveis = self.compraveis(mesa, mao)##ou seja, todos que podem estar na mao de min
+		for pedra in jogaveis:
+			if pedra.direita != mesa[-1].direita and pedra.esquerda != mesa[-1].direita:
+				jogaveis.remove(pedra)
+		return jogaveis
 
 	def compraveis(mesa, mao):
 		pedras = [Pedra.Pedra(0,0), Pedra.Pedra(0,1), Pedra.Pedra(0,2), Pedra.Pedra(0,3), Pedra.Pedra(0,4), Pedra.Pedra(0,5),
