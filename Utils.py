@@ -53,3 +53,8 @@ class Utils:
 		return pedras
 	def probabilidade_buy_pedra(self, sizeCompraveis, sizeCompra, sizeAdversarioHand):
 		return sizeCompra/(sizeCompraveis*(sizeCompra+sizeAdversarioHand))
+	
+	def prob_min_play(mesa, mao, sizeCompra, sizeAdversarioHand): ##TODO
+		return 0
+	def prob_min_buy(self, mesa, mao, sizeCompra, sizeAdversarioHand):
+		return 1 - self.prob_min_play(mesa, mao, sizeCompra, sizeAdversarioHand)
