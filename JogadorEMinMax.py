@@ -81,24 +81,6 @@ class JogadorEMinMax:
 		'''
 		return ##int
 
-
-	def worst_compra_max(self, mesa, mao, sizeCompra, sizeAdversarioHand):
-		'''
-			valor = 999999
-			worstPedra = None
-			compraveis = u.compraveis(mesa, mao)
-			para cada pedra compraveis:
-				jogaveisEsquerda = u.jogaveis_max_esquerda(mesa, mao com pedra)
-				jogaveisDireita = u.jogaveis_max_direita(mesa, mao com pedra)
-				if(jogaveisEsquerda.length == 0 and jogaveisDireita.length==0)
-					novoValor = self.min(mesa, mao com pedra, sizeCompra-1, sizeAdversarioHand)
-					if(novoValor<valor):
-						valor = novoValor
-						worstPedra = pedra
-			return worstPedra
-		'''
-		return None
-
 	def prob_max(self, mesa, mao, sizeCompra, sizeAdversarioHand):
 		''' 
 			if u.jogaveis_max_esquerda().length == 0:
@@ -109,8 +91,11 @@ class JogadorEMinMax:
 					return self.prob_min(mesa, mao, sizeCompra, sizeAdversarioHand, turnosSemJogo)##max não comprou, então é um turno sem jogo
 				else: 
 					##se da pra comprar, considera pior caso de compra
-					novaMao = self.worst_compra_max(mesa, mao, sizeCompra, sizeAdversarioHand)
-					return self.max(mesa, novaMao, sizeCompra-1, sizeAdversarioHand, 0) 
+					prob = 0;
+					para cada pedra em u.compraveis(mesa, mao):
+						novaMao = mao.append(pedra)
+						prob = prob + u.probabilidade_buy(pedra, mesa, sizeCompra, sizeAdversarioHand)*self.prob_min(mesa, novaMao, sizeCompra-1, sizeAdversarioHand, 0) 
+					return prob
 			else:
 				return self.max(mesa, mao, sizeCompra, sizeAdversarioHand, 0)
 				
@@ -126,15 +111,12 @@ class JogadorEMinMax:
 					return self.prob_max(mesa, mao, sizeCompra, sizeAdversarioHand, turnosSemJogo)##min não comprou, então é um turno sem jogo
 				else:
 					return self.prob_max(mesa, mao, sizeCompra-1, sizeAdversarioHand+1, 0) 
-					##min vai comprar mas nunca vai vir pedra "boa" pois todas estão na mesa ou com max
-					##então chama logo max ao inves de chamar min e testar isso dentro do metodo
-					##melhor testar aqui pois so aqui existe o controle se min comprou ou passou a vez
+					##min não vai ter pedra para jogar
 			else:
 				return
 						(
 							probabilidade de min ter alguma pedra pra jogar * self.min(mesa, mao, sizeCompra, sizeAdversarioHand, 0) +
-							probabilidade dele comprar uma pedra que de para jogar * self.min(mesa, mao, sizeCompra-1sizeAdversarioHand+1, 0) +
-							probabilidade dele comprar uma pedra ruim * self.prob_max(mesa, mao, sizeCompra-1sizeAdversarioHand+1, 0)
+							probabilidade dele comprar * self.prob_max(mesa, mao, sizeCompra-1sizeAdversarioHand+1, 0)
 						) ##considera que ele sempre tem ou compra a melhor pedra possivel, então calcula o pior caso
 			
 		'''
