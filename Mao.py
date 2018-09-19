@@ -24,4 +24,8 @@ class Mao:
 				if x.get_soma() > response.get_soma():
 					response = x
 		return response
-
+	def mao_most_valorosa(maoA, maoB):## retorna True se maoA é quem começa
+		fakeMao = Mao([maoA.most_valorosa(), maoB.most_valorosa()])
+		if Pedra.is_igual(fakeMao.most_valorosa(),maoA,most_valorosa()):
+			return True
+		return False
