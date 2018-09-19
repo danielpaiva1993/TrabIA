@@ -51,6 +51,5 @@ class Utils:
 					novaMao.remove(p)
 					break
 		return pedras
-	def probabilidade_buy(pedra, mesa, sizeCompra, sizeAdversarioHand)):
-		##return a probabilidade de comprar determinada pedra
-		return ##int
+	def probabilidade_buy_pedra(self, sizeCompraveis, sizeCompra, sizeAdversarioHand):
+		return sizeCompra/(sizeCompraveis*(sizeCompra+sizeAdversarioHand))
