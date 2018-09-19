@@ -52,7 +52,6 @@ class Domino:
 						
 					else:
 						self.compra = self.jogadorA.buy_pedra(self.compra)
-						self.mesa = jogadorA.play_turno(mesa, self.compra.length, jogadorB.mao.length)
 						turnosSemJogo = 0
 				else:
 					self.mesa = 
