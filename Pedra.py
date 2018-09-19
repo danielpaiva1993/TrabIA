@@ -24,9 +24,6 @@ class Pedra:
 			return True
 		return False
 
-	def compara(pedraA, pedraB): ###TODO metodo de comparação
-		return pedraA
-	
 	def is_igual(pedraA, pedraB):
 		if pedraA.esquerda == pedraB.esquerda:
 			if pedraA.direita == pedraB.direita:
