@@ -26,7 +26,19 @@ class Pedra:
 
 	def compara(pedraA, pedraB): ###TODO metodo de comparação
 		return pedraA
-
+	
+	def is_igual(pedraA, pedraB):
+		if pedraA.esquerda == pedraB.esquerda:
+			if pedraA.direita == pedraB.direita:
+				return True
+			else:
+				return False
+		elif pedraA.esquerda == pedraB.direita:
+			if pedraA.direita == pedraB.esquerda:
+				return True
+			else:
+				return False
+			
 	def invertePedra(self):
 		aux = self.esquerda
 		self.esquerda = self.direita
