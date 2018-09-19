@@ -23,13 +23,21 @@ class Domino:
 		self.jogadorA = JogadorEMinMax.JogadorEMinMax(self.maoA)
 
 		self.maoB = Mao.Mao(self.pedras[7:14])
+		self.jogadorB = JogadorEMinMax.JogadorEMinMax(self.maoB) ##TODO apagar
 		###self.jogadorB = intB.MonteCarlo(self.maoB)
 
 		self.compra = self.pedras[14:]
-		'''
-		TODO comparar as duas mãos e ver quem joga
-		self.turno(self.jogadorQueComeca, self.outroJogador)
-		'''
+		
+		if Mao.mao_most_valoroda(self.maoA, self.maoB):
+			turno = self.turno(self.jogadorA, self.jogadorB, 0)
+		else:
+			turno = self.turno(self.jogadorB, self.jogadorA, 0)
+		if turno == 0:
+			print('Empate')
+		elif turno ==1:
+			print('EMinMax ganhou!)
+		else:
+			print('MonteCarlo ganhou!)
 	
 	def turno(self, jogadorA, jogadorB, turnosSemJogo):
 		##1 jogadorA ganhou
