@@ -1,7 +1,10 @@
 import Pedra
 import Mao
+import Mesa
 import random
 import JogadorEMinMax
+import MCTSPlayer
+
 class Domino:
 	pedras = []
 	maoA = []
@@ -27,51 +30,51 @@ class Domino:
 		###self.jogadorB = intB.MonteCarlo(self.maoB)
 
 		self.compra = self.pedras[14:]
-		
-		if Mao.mao_most_valoroda(self.maoA, self.maoB):
+
+		if Mao.mao_most_valorosa(self.maoA, self.maoB):
 			turno = self.turno(self.jogadorA, self.jogadorB, 0)
 		else:
 			turno = self.turno(self.jogadorB, self.jogadorA, 0)
 		if turno == 0:
 			print('Empate')
-		elif turno ==1:
+		elif turno == 1:
 			print('EMinMax ganhou!)
 		else:
 			print('MonteCarlo ganhou!)
-	
+
 	def turno(self, jogadorA, jogadorB, turnosSemJogo):
 		##1 jogadorA ganhou
 		##2 jogadorB ganhou
 		##0 empate
-			if(jogadorA.mao.length == 0):
-				if(jogadorB.mao.length == 0):
+			if(jogadorA.mao.length == 0): #ERRO
+				if(jogadorB.mao.length == 0): #ERRO
 					return 0 ##empate
 				else:
 					return 1 ##A ganhou
 			else:
-				resp = jogadorA.play_turno(mesa, self.compra.length, jogadorB.mao.length)
+				resp = jogadorA.play_turno(mesa, self.compra.length, jogadorB.mao.length) #ERRO
 
 				if(resp == self.mesa.atual):
-					if(self.compra.length == 0):
+					if(self.compra.length == 0): #ERRO
 						turnosSemJogo+=1
 
 						if(turnosSemJogo==2): ##Se B tbm não jogou nem comprou na partida anterior, empate
 							return 0
-						
+
 					else:
 						self.compra = self.jogadorA.buy_pedra(self.compra)
 						turnosSemJogo = 0
 				else:
-					self.mesa.atual = resp 
+					self.mesa.atual = resp
 					turnosSemJogo = 0
 
 				proxTurno = self.turno(jogadorB, jogadorA, turnosSemJogo)
-				
+
 				if(proxTurno == 0): ##Empate
 					return 0
 
 				if(proxTurno == 1): ##jogadorB ganhou (pois B é "A" em proxTurno)
 					return 2
-				
+
 				if(proxTurno == 2): ##jogadorA ganhou (pois A é B em proxTurno)
 					return 1
