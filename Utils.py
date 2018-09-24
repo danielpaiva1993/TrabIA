@@ -1,6 +1,6 @@
 import Pedra
 class Utils:
-	
+
 	def jogaveis_max_esquerda(mesa, mao):
 		jogaveis = []
 		for pedra in mao:
@@ -53,8 +53,32 @@ class Utils:
 		return pedras
 	def probabilidade_buy_pedra(self, sizeCompraveis, sizeCompra, sizeAdversarioHand):
 		return sizeCompra/(sizeCompraveis*(sizeCompra+sizeAdversarioHand))
-	
-	def prob_min_play(mesa, mao, sizeCompra, sizeAdversarioHand): ##TODO
-		return 0
+
+	def prob_min_play(mesa, mao, sizeCompra): #ALTERADO
+		if len(mesa) == 0:
+			return 1
+
+		edgeA = mesa[0].esquerda
+		edgeB = mesa[-1].direita
+		if edgeA == edgeB:  #caso dos dois cantos da mesa terem o mesmo valor, só existem 7 peças em todo o jogo que poderiam ser jogadas nessa situação(todas que contenham esse valor)
+			cont = 7
+			for i in range(len(mesa)):
+				if mesa[i].direita == edgeA or mesa[i].esquerda == edgeA: #ambos cantos iguais, checando quais peças que poderiam ser jogadas ja estão na mesa
+					cont -= 1
+			for j in range(len(mao)):
+				if mao[i].direita == edgeA or mao[i].esquerda == edgeA:
+					cont -= 1
+			prob = 1 - cont/sizeCompra #cont/sizeCompra representa a probabilidade de todas as pedras que min poderia jogar estarem na pilha de compra, o cont é o número de peças disponíveis para serem jogadas por min
+			return prob
+		else: # para o caso de ambos os cantos da mesa serem numeros diferentes se tem 13 peças possiveis no jogo, são 7 peças para um canto e 7 para o outro, com uma repetida, portanto 13
+			cont = 13
+			for i in range(len(mesa)):
+				if (mesa[i].direita == edgeA or mesa[i].esquerda == edgeA) or (mesa[i].direita == edgeB or mesa[i].esquerda == edgeB):
+					cont -= 1
+			for j in range(len(mao)):
+				if (mao[i].direita == edgeA or mao[i].esquerda == edgeA) or (mao[i].direita == edgeB or mao[i].esquerda == edgeB):
+					cont -= 1
+			prob = 1 - cont/sizeCompra
+			return prob
 	def prob_min_buy(self, mesa, mao, sizeCompra, sizeAdversarioHand):
 		return 1 - self.prob_min_play(mesa, mao, sizeCompra, sizeAdversarioHand)

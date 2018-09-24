@@ -46,16 +46,16 @@ class Domino:
 		##1 jogadorA ganhou
 		##2 jogadorB ganhou
 		##0 empate
-			if(jogadorA.mao.length == 0): #ERRO
-				if(jogadorB.mao.length == 0): #ERRO
+			if(len(jogadorA.mao) == 0): #ALTERADO
+				if(len(jogadorB.mao) == 0): #ALTERADO
 					return 0 ##empate
 				else:
 					return 1 ##A ganhou
 			else:
-				resp = jogadorA.play_turno(mesa, self.compra.length, jogadorB.mao.length) #ERRO
+				resp = jogadorA.play_turno(mesa, len(self.compra), len(jogadorB.mao)) #ALTERADO
 
 				if(resp == self.mesa.atual):
-					if(self.compra.length == 0): #ERRO
+					if(len(self.compra) == 0): #ALTERADO
 						turnosSemJogo+=1
 
 						if(turnosSemJogo==2): ##Se B tbm não jogou nem comprou na partida anterior, empate
