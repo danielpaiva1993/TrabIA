@@ -80,5 +80,5 @@ class Utils:
 					cont -= 1
 			prob = 1 - cont/sizeCompra
 			return prob
-	def prob_min_buy(self, mesa, mao, sizeCompra, sizeAdversarioHand):
-		return 1 - self.prob_min_play(mesa, mao, sizeCompra, sizeAdversarioHand)
+	def prob_min_buy(self, mesa, mao, sizeCompra):
+		return 1 - self.prob_min_play(mesa, mao, sizeCompra)
